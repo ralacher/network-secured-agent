@@ -24,13 +24,13 @@ param tags object = {}
 param suffix string
 
 @description('The name of the virtual network')
-param vnetName string = 'agents-vnet-${suffix}'
+param vnetName string = 'agent-vnet'
 
 @description('The name of Agents Subnet')
-param agentsSubnetName string = 'agents-subnet-${suffix}'
+param agentsSubnetName string = 'agent-subnet'
 
 @description('The name of Hub subnet')
-param hubSubnetName string = 'hub-subnet-${suffix}'
+param hubSubnetName string = 'hub-subnet'
 
 @description('Model/AI Resource deployment location')
 param modelLocation string
@@ -43,20 +43,20 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   properties: {
     addressSpace: {
       addressPrefixes: [
-        '172.16.0.0/16'
+        '10.0.0.0/16'
       ]
     }
     subnets: [
       {
         name: hubSubnetName
         properties: {
-          addressPrefix: '172.16.0.0/24'
+          addressPrefix: '10.0.1.0/24'
         }
       }
       {
         name: agentsSubnetName
         properties: {
-          addressPrefix: '172.16.101.0/24'
+          addressPrefix: '10.0.0.0/24'
           delegations: [
             {
               name: 'Microsoft.app/environments'
